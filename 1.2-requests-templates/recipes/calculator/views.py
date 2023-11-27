@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 
 DATA = {
@@ -28,3 +29,17 @@ DATA = {
 #     'ингредиент2': количество2,
 #   }
 # }
+
+
+def recipes(request, dish):
+    servings: int = int(request.GET.get("servings", 1))
+    ingredients: dict = DATA.get(dish).copy()
+    for key in ingredients:
+        ingredients[key] = ingredients.get(key) * servings
+
+    context: dict = {
+        'recipe': ingredients,
+    }
+
+    return render(request, 'calculator/index.html', context)
+
