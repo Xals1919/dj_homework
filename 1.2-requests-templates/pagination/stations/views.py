@@ -10,7 +10,7 @@ def index(request):
 
 
 def bus_stations(request):
-    with open('data-398-2018-08-30.csv', newline='', encoding='utf8') as csvfile:
+    with open('pagination/data-398-2018-08-30.csv', newline='', encoding='utf8') as csvfile:
         reader: list = list(csv.DictReader(csvfile))
     page_number: int = request.GET.get("page", 1)
     paginator = Paginator(reader, 10)
